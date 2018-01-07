@@ -43,8 +43,8 @@ func QuerySessionInfo(server QueryOpts) ([]SessionInfo, error) {
 	response := make([]SessionInfo, 0, len(sessions))
 	for _, s := range sessions {
 		response = append(response, SessionInfo{
-			Host: "localhost",
-			Port: 27750,
+			Host: "",
+			Port: 0,
 			Id: s.Id,
 			Alias: s.Alias,
 			Protocol: s.Protocol,

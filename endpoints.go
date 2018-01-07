@@ -28,6 +28,11 @@ func SessionListEndpoint(ctx *apiContext) apiResponse {
 			return internalServerError()
 		}
 
+		for i, _ := range list {
+			list[i].Host = ctx.cfg.ServerHost
+			list[i].Port = ctx.cfg.ServerPort
+		}
+
 		return SessionListResponse{list}
 
 	} else {
