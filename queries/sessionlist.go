@@ -55,6 +55,7 @@ func QuerySessionInfo(server QueryOpts) ([]SessionInfo, error) {
 			Nsfm: s.Nsfm,
 			Owner: s.Founder,
 			Started: s.StartTime,
+			Size: s.Size,
 		})
 	}
 
