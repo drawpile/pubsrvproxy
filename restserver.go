@@ -15,6 +15,8 @@ func StartServer(cfg *config) {
 		mux.HandleApiEndpoint("/users/", UserListEndpoint)
 	}
 
+	mux.HandleApiEndpoint("/", ServerInfoEndpoint)
+
 	log.Println("Starting dpserver public statistics proxy server at", cfg.Listen, "proxying", cfg.ServerAddr)
 	log.Fatal(http.ListenAndServe(cfg.Listen, mux))
 }

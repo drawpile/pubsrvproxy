@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/BurntSushi/toml"
-	"os"
 	"log"
+	"os"
 )
 
 type config struct {
@@ -14,6 +14,9 @@ type config struct {
 	CacheTime   int64
 	UserView    bool
 	ShowUserIps bool
+	Name        string
+	Description string
+	Favicon     string
 }
 
 func defaultConfig() *config {
@@ -25,6 +28,9 @@ func defaultConfig() *config {
 		CacheTime:   60,
 		UserView:    false,
 		ShowUserIps: false,
+		Name:        "pubsrvproxy",
+		Description: "Sessions running on this Drawpile server",
+		Favicon:     "",
 	}
 
 	hostname, err := os.Hostname()

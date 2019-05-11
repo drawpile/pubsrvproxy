@@ -7,6 +7,37 @@ import (
 )
 
 /**
+ * Server info
+ */
+type ServerInfoResponse struct {
+	ApiName     string `json:"api_name"`
+	Version     string `json:"version"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Favicon     string `json:"favicon"`
+	ReadOnly    bool   `json:"read_only"`
+}
+
+func (r ServerInfoResponse) WriteResponse(w http.ResponseWriter) {
+	writeJsonResponse(w, r, http.StatusOK)
+}
+
+func ServerInfoEndpoint(ctx *apiContext) apiResponse {
+	if len(ctx.path) == 0 {
+		return ServerInfoResponse{
+			ApiName:     "drawpile-session-list",
+			Version:     "1.5",
+			Name:        ctx.cfg.Name,
+			Description: ctx.cfg.Description,
+			Favicon:     ctx.cfg.Favicon,
+			ReadOnly:    true,
+		}
+	} else {
+		return notFoundResponse()
+	}
+}
+
+/**
  * List sessions
  *
  * The returned response is compatible with the one that the listserver returns.
@@ -72,4 +103,3 @@ func UserListEndpoint(ctx *apiContext) apiResponse {
 		return notFoundResponse()
 	}
 }
-
