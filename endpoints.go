@@ -16,6 +16,8 @@ type ServerInfoResponse struct {
 	Description string `json:"description"`
 	Favicon     string `json:"favicon"`
 	ReadOnly    bool   `json:"read_only"`
+	Public      bool   `json:"public"`
+	Private     bool   `json:"private"`
 }
 
 func (r ServerInfoResponse) WriteResponse(w http.ResponseWriter) {
@@ -26,11 +28,13 @@ func ServerInfoEndpoint(ctx *apiContext) apiResponse {
 	if len(ctx.path) == 0 {
 		return ServerInfoResponse{
 			ApiName:     "drawpile-session-list",
-			Version:     "1.5",
+			Version:     "1.6",
 			Name:        ctx.cfg.Name,
 			Description: ctx.cfg.Description,
 			Favicon:     ctx.cfg.Favicon,
 			ReadOnly:    true,
+			Public:      true,
+			Private:     false,
 		}
 	} else {
 		return notFoundResponse()
